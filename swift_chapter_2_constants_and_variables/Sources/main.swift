@@ -123,12 +123,13 @@ var unspecified_integer: Int
   equality_0 == "thingme" //false
   equality_0 == "Thingme" //true
 
-  equality_0.hasPrefix("Thing") //true
-  equality_0.hasSuffix("Thing") //false
+  //NOTE: Swift 4.0.2 seems to be missing some members from the string interface: hasPrefix, hasSuffix, replacingOccurrences and substring are missing
+  //equality_0.hasPrefix("Thing") //true
+  //equality_0.hasSuffix("Thing") //false
 
   //Replace and substring
   var replace_string = "one,to,three,four"
-  print(replace_string.replacingOccurrences(of: "to", with: "two"))
+  //print(replace_string.replacingOccurrences(of: "to", with: "two"))
 
   var string_path = "/one/two/three/four"
 
@@ -136,13 +137,16 @@ var unspecified_integer: Int
   let start_index = string_path.index(string_path.startIndex, offsetBy: 4)
   let end_index   = string_path.index(string_path.startIndex, offsetBy: 14)
 
-  let substring_path = string_path[startIndex ..< endIndex] //returns the "/two/three"
+  let substring_path = string_path[start_index ..< end_index] //returns the "/two/three"
 
   //convert the substring to a string
   let string_sub_path = String(substring_path)
 
-  string_path.substring(to: startIndex)  //returns the "/one"
-  string_path.substring(from: endIndex)  //returns the "/four"
+  //string_path.substring(to: startIndex)  //returns the "/one"
+  //string_path.substring(from: endIndex)  //returns the "/four"
+
+  String(string_path[..<start_index])  //returns the "/one" with the ..(upto)<(excluding)
+  String(string_path[end_index...])  //returns the "/four"
 
   string_path.last
   string_path.first
